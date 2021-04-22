@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if user.is_superuser or user.is_staff %}
+        <a href="{% url 'inventory:item_create' %}">Add Item</a>
+    {% endif %}
+    <table>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td>Item Type</td>
+                <td>Stock</td>
+                <td>Price</td>
+                <td colspan="3">Options</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.itemtype.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>${{ item.price }}</td>
+                <td><a href="{% url 'inventory:item_detail' item.id %}">View</a></td>
+                
+                {% if user.is_superuser or user.is_staff %}
+                    <td><a href="{% url 'inventory:item_update' item.id %}">Update</a></td>
+                    <td><a href="{% url 'inventory:item_delete' item.id %}">Delete</a></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content%}

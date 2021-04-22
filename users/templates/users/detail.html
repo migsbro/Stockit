@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <ul>
+        <li><b>ID:</b> {{ user_.id }}</li>
+        <li><b>Username:</b> {{ user_.username }}</li>
+        <li><b>Name:</b> {{ user_.name }}</li>
+        <li><b>Phone Number:</b> {{ user_.phone_number }}</li>
+        <li><b>Email:</b> {{ user.email }}</li>
+        {% if user.is_superuser or user.is_staff or user == user_ %}
+            <li><b>Address:</b> {{ user_.address }}</li>
+        {% endif %}
+        <li><b>Administrator:</b> {{ user_.is_superuser|yesno:"Yes,No" }}</li>
+    </ul>
+    
+    <a href="{% url 'users:list' %}">Back</a>
+
+    {% if user.is_superuser or user == user_ %}
+        <a href="{% url 'users:update' user_.id %}">Update</a>
+        <a href="{% url 'users:delete' user_.id %}">Delete</a>
+    {% endif %}
+{% endblock content%}

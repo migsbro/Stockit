@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form enctype="multipart/form-data" method="POST" class="form-horizontal">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% block back_button %}{% endblock back_button %}
+{% endblock content %}

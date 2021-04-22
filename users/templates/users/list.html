@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td>Phone</td>
+                <td>Email</td>
+                {% if user.is_superuser or user.is_staff %}
+                    <td>Address</td>
+                {% endif %}
+                <td>Administrator</td>
+                <td>Staff</td>
+                <td colspan="3">Options</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user_ in users %}
+            <tr>
+                <td>{{ user_.id }}</td>
+                <td>{{ user_.name }}</td>
+                <td>{{ user_.phone_number }}</td>
+                <td>{{ user_.email }}</td>
+                {% if user.is_superuser or user.is_staff %}
+                    <td>{{ user_.address }}</td>
+                {% endif %}
+                <td>{{ user_.is_superuser|yesno:"Yes,No" }}</td>
+                <td>{{ user_.is_staff|yesno:"Yes,No" }}</td>
+                <td><a href="{% url 'users:detail' user_.id %}">View</a></td>
+                
+                {% if user.is_superuser or user == user_ %}
+                    <td><a href="{% url 'users:update' user_.id %}">Update</a></td>
+                    <td><a href="{% url 'users:delete' user_.id %}">Delete</a></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content%}

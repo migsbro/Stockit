@@ -1,10 +1,19 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
         <title>Stockit</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
     </head>
     <body>
         <a href="{% url 'home:home' %}">Stockit</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'users:logout' %}">Logout</a>
+            <a href="{% url 'users:detail' user.id %}"><b>Hi, {{ user.first_name }}!</b></a>
+        {% else %}
+            <a href="{% url 'users:login' %}">Login</a>
+            <a href="{% url 'users:register' %}">Register</a>
+        {% endif %}
         {% block content %}{% endblock content %}
     </body>
 </html>
