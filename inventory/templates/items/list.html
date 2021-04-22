@@ -3,6 +3,7 @@
 {% block content %}
     {% if user.is_superuser or user.is_staff %}
         <a href="{% url 'inventory:item_create' %}">Add Item</a>
+        <a href="{% url 'inventory:itemtype_list' %}">View Types</a>
     {% endif %}
     <table>
         <thead>

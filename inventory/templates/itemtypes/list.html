@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if user.is_superuser%}
+        <a href="{% url 'inventory:itemtype_create' %}">Add Item Type</a>
+    {% endif %}
+
+    <a href="{% url 'inventory:item_list' %}">View Inventory</a>
+    <table>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td colspan="3">Options</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for itemtype in itemtypes %}
+            <tr>
+                <td>{{ itemtype.id }}</td>
+                <td>{{ itemtype.name }}</td>
+                
+                {% if user.is_superuser %}
+                    <td><a href="{% url 'inventory:itemtype_update' itemtype.id %}">Update</a></td>
+                    <td><a href="{% url 'inventory:itemtype_delete' itemtype.id %}">Delete</a></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content%}

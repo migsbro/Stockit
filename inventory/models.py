@@ -8,6 +8,9 @@ class ItemType(models.Model):
 
     def __str__(self):
         return f"ID {self.id}: {self.name}"
+    
+    def get_absolute_url(self):
+        return reverse("inventory:itemtype_list")
 
     class Meta:
         verbose_name_plural = "Item Types"
