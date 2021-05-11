@@ -1,0 +1,25 @@
+Unauthenticated User:
+    -View items
+    -View users
+
+Regular Users
+    -View accounts
+    -View items
+    -Update/delete own account
+
+Staff Users:
+    -View/update/delete items
+    -View item types
+    -View accounts
+    -Update/delete own account
+
+Admin Users:
+    -View/update/delete items
+    -View/update/delete item types
+    -View/update/delete users
+    
+
+
+NOTE: Deleting a user from the website doesn't remove the record from the database. It changes 
+the is_active attribute from True to False, disabling the account. The site administration page 
+is where we can reinstate or delete users from the database.
